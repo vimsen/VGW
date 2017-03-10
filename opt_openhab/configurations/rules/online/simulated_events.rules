@@ -1,0 +1,82 @@
+import org.openhab.core.library.types.*
+import org.openhab.core.persistence.*
+import org.openhab.model.script.actions.*
+import org.joda.time.*
+
+
+//rule "Simulate Energy Production Values"
+//when
+//        Time cron "0 0/2 * * * ?"
+//then
+//        var Number mhour = now.getHourOfDay
+//        if ((mhour> 7) && (mhour < 18)) {
+//        postUpdate(itm_uber1_production_mqtt, 8.8 + (2.5 - (Math::random * 0.5).intValue) / 10.0)
+//        } else {
+//        postUpdate(itm_uber1_production_mqtt, 0.0 + (0.1 - (Math::random * 0.1).intValue) / 10.0)
+//	}
+//end
+
+//rule "Simulate Total Energy Consumption Values"
+//when
+//        Time cron "0 0/1 * * * ?"
+//then
+//        postUpdate(itm_uber1_consumption_mqtt, 1400.0 + (350.0 - (Math::random * 150.0).intValue) / 10.0)
+//end
+
+
+//rule "Simulate Dryer - WashingM Consumption Values - ON"
+//when
+//        Time cron "0 0/3 8,16,20 * * ?"
+//then
+//        postUpdate(itm_uber1_dryer_mqtt, 1050.0 + (147.0 - (Math::random * 80.0).intValue) / 10.0)
+//        postUpdate(itm_uber1_washing_mqtt, 1020.0 + (117.0 - (Math::random * 70.0).intValue) / 10.0)
+//end
+
+//rule "Simulate Dryer - WashingM Consumption Values - OFF"
+//when
+//        Time cron "0 0/3 * * * ?"
+//then
+//        var Number hour = now.getHourOfDay
+//	if ((hour> 10) || (hour > 18) || (hour > 22)) {
+//	postUpdate(itm_uber1_dryer_mqtt, 4.0 + (5.0 - (Math::random * 2.0).intValue) / 2.0)
+//        postUpdate(itm_uber1_washing_mqtt, 2.0 + (6.0 - (Math::random * 3.0).intValue) / 2.0)
+//	}
+//end
+
+
+rule "WashingM is ON"
+when
+      Time cron "0 30 15 * * ?"
+then
+	postUpdate(itm_uber1_washing_mqtt, 1020.0 + (117.0 - (Math::random * 70.0).intValue) / 10.0)
+//	pushover("VGW - Washing Machine is ON!",0)
+}
+end
+
+rule "WashingM is OFF"
+when
+      Time cron "0 45 16 * * ?"
+then
+     postUpdate(itm_uber1_washing_mqtt, 0.0)
+//     pushover("VGW - Washing Machine is DONE!",1)
+}
+end
+
+rule "Dryer is ON"
+when
+      Time cron "0 30 17 * * ?"
+then
+        postUpdate(itm_uber1_dryer_mqtt, 900.0 + (60.0 - (Math::random * 40.0).intValue) / 10.0)
+//        pushover("VGW - Dryer is ON!",0)
+}
+end
+
+rule "Dryer is OFF"
+when
+      Time cron "0 45 18 * * ?"
+then
+     postUpdate(itm_uber1_dryer_mqtt, 0.0)
+//     pushover("VGW - Dryer is DONE!",1)
+}
+end
+

@@ -1,0 +1,85 @@
+import org.openhab.core.library.types.*
+import org.openhab.core.persistence.*
+import org.openhab.model.script.actions.*
+//import org.openhab.action.*
+
+rule "George is @Home - Location"
+when
+	Item G_at_home changed from OFF to ON
+//      Item Location_George_Phone received update
+then
+//	logInfo("presence rule", "George Coords: " + Location_George_Phone)
+ 	pushNotification("VIMSEN", "George is at HOME!")
+	notifyMyAndroid("VIMSEN", "George is at HOME!", 1)
+}
+end
+
+rule "Maria is @Home - Location"
+when
+        Item M_at_home changed from OFF to ON
+then
+        pushNotification("VIMSEN", "Maria is at HOME!")
+        notifyMyAndroid("VIMSEN", "Maria is at HOME!", 1)
+}
+end
+
+rule "periodocally check presence - WiFi"
+when
+	Time cron "0 */5 * * *  ?"
+then
+	if (Proximity.members.filter(s | s.state == ON).size == 0) {
+		if (Proximity.members.filter(s | s.changedSince(now.minusMinutes(5))).size ==0) {
+		logInfo("presence", "Nobody at home")
+//		notifyMyAndroid("VIMSEN", "Nobody is @home", 1)
+		} 
+	}
+        if (Proximity.members.filter(s | s.state == ON).size == 2) {
+                if (Proximity.members.filter(s | s.changedSince(now.minusMinutes(5))).size ==2) {
+                logInfo("presence", "ALL at home")
+                notifyMyAndroid("VIMSEN", "Family is @home", 1)
+                }
+        }
+	if (Proximity.members.filter(s | s.state == ON).size == 1) {
+                if (Proximity.members.filter(s | s.changedSince(now.minusMinutes(5))).size ==1) {
+                logInfo("presence", "Somebody at home")
+//                notifyMyAndroid("VIMSEN", "Somebody is @home", 1)
+			if (mS4Ping.state == ON) {
+	               	notifyMyAndroid("VIMSEN", "Maria is @home", 1)
+			}
+                        if (gS4Ping.state == ON) {
+                        notifyMyAndroid("VIMSEN", "George is @home", 1)
+                        }
+  
+              }
+	} 
+
+end
+
+//rule "Maria is @Home (2) - Ping"
+//when
+//        Item mS4Ping changed from OFF to ON
+//then
+//        pushNotification("VIMSEN", "Maria is at HOME!")
+//        notifyMyAndroid("VIMSEN", "Maria is at HOME!", 1)
+//}
+//end
+
+//rule "George is @Home (2) - Ping"
+//when
+//        Item gS4Ping changed from OFF to ON
+//then
+//        pushNotification("VIMSEN", "George is at HOME!")
+//        notifyMyAndroid("VIMSEN", "George is at HOME!", 1)
+//}
+/end
+
+
+rule "MQTT broker is DOWN!"
+when
+        Item mqttbrokerPing changed from ON to OFF
+then
+        pushNotification("VIMSEN", "!!!--MQTT broker is DOWN--!!!")
+        notifyMyAndroid("VIMSEN", "!!!--MQTT broker is DOWN--!!!, 2)
+}
+end
+

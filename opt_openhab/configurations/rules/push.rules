@@ -1,0 +1,33 @@
+import org.openhab.core.library.types.*
+import org.openhab.core.persistence.*
+import org.openhab.model.script.actions.*
+import org.joda.time.* 
+
+rule "Fibaro Plug 2 is ON"
+        when
+          Item FibaroPlug_2 changed from OFF to ON
+        then
+          pushover("hVGW - FibPlug 2 (Heating) switched ON!",1)
+end
+
+rule "Fibaro Plug 1 is ON"
+        when
+          Item FibaroPlug_1 changed from OFF to ON
+        then
+          pushover("hVGW - FibPlug 1 (Audio) switched ON!",1)
+end
+
+rule "Fibaro Plug 2 is OFF"
+        when
+          Item FibaroPlug_2 changed from ON to OFF
+        then
+          pushover("hVGW - FibPlug 2 (Heating) switched OFF!",1)
+end
+
+rule "Fibaro Plug 1 is OFF"
+        when
+          Item FibaroPlug_1 changed from ON to OFF
+        then
+          pushover("hVGW - FibPlug 1 (Audio) switched OFF!",1)
+end
+

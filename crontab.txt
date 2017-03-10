@@ -1,0 +1,17 @@
+# Edit this file to introduce tasks to be run by cron.
+# 
+# m h  dom mon dow   command
+#@reboot sudo /home/pi/startSakis3g.sh 
+@reboot sudo /home/pi/startVPN.sh
+@reboot sudo sh /home/pi/startOpenhab.sh 
+#@reboot python /home/pi/howOften.py >> /dev/null 2>&1 &
+reboot python /home/pi/cron/forecast-io.py >> /dev/null 2>&1 &
+@reboot sudo sh /home/pi/sendVPNip.sh
+/1 * * * * sudo python /home/pi/cron/VGW_info_now.py >> /dev/null 2>&1
+8,18,28,38,48,58 * * * * sudo /home/pi/ping_google_com.sh >> /home/pi/reboot.log
+9,19,29,39,49,59 * * * * sudo python /home/pi/re_send_mail_IPchange.py >> /home/pi/reboot.log
+@reboot sleep 200 && sudo bash /home/pi/PM3250/launcher_all.sh >> /dev/null 2>&1
+@reboot sleep 210 && sudo bash /home/pi/PM3250/launcher_total_energy.sh >> /dev/null 2>&1
+@reboot sudo python /home/pi/subscribeSSR_LDR.py >> /dev/null 2>&1 &
+*/10 * * * * sudo sh /home/pi/checkSSR.sh
+#4 4 * * * sudo sh /home/pi/backup.sh

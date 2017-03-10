@@ -1,0 +1,82 @@
+import org.openhab.core.library.types.*
+import org.openhab.core.persistence.*
+import org.openhab.model.script.actions.*
+import org.joda.time.*
+
+var Timer powerstattimer1
+var Timer powerstattimer2
+var Timer zwaveAlertTimer
+var Number totalPower
+var Number totalEnergy
+
+// calculate daily consumption 
+
+rule "powerstats"
+when
+	Item meter1_energy received update
+	or Item meter2_energy received update
+	or Item meter3_energy received update
+then	
+//	logInfo( "rules.powerstats", "Starting...")
+	if( meter1_power.state >=0 && meter2_power.state >=0 && meter3_power.state >=0) {
+	totalPower = meter1_power.state as DecimalType + meter2_power.state as DecimalType + meter3_power.state as DecimalType
+	totalPower = totalPower/1000 
+	if (totalPower >=0) {
+	     postUpdate( HEM_DailyPower, totalPower )			
+
+		if(powerstattimer1==null || powerstattimer1.hasTerminated) {
+			HEM_DailyPower.persist
+			powerstattimer1 = createTimer(now.plusMinutes(1))[|]
+        	} else {
+//        	  logWarn( "powerstattimer","did not persist HEM_DailyPower cause timer is still running")
+        	}		
+		} 
+		else logWarn( "powerstats","Power calculation error 1")
+		} 
+
+	
+	if( meter1_energy.state >=0 && meter2_energy.state >=0 && meter3_energy.state >=0) {
+		totalEnergy = meter1_energy.state as DecimalType + meter2_energy.state as DecimalType + meter3_energy.state as DecimalType 
+                totalEnergy = totalEnergy/1000
+		if (totalEnergy >=0) {
+			postUpdate( HEM_TotalEnergy, totalEnergy )
+		if(powerstattimer2==null || powerstattimer2.hasTerminated){
+			HEM_TotalEnergy.persist
+			powerstattimer2 = createTimer(now.plusMinutes(1))[|]
+	      	} else {
+//        		logWarn( "powerstattimer","did not persist HEM_TotalEnergy cause timer is still running")
+        	}
+		} 
+	}
+
+// logInfo( "powerstats", "finished..")
+end
+
+
+//rule "voltstats"
+//	when
+//		Item meter1_volt received update
+//		or Item meter2_volt received update
+//		or Item meter3_volt received update
+//	then	
+//
+//	if( meter1_volt.state >=0 && meter2_volt.state >=0 && meter3_volt.state >=0){	
+//		var Number avgVoltage = (meter1_volt.state as DecimalType + meter2_volt.state as DecimalType + meter3_volt.state as DecimalType) /3 
+//		if (avgVoltage >=0) {
+//			postUpdate( HEM_V, avgVoltage )
+//		} 
+//	}
+//end
+
+//rule "currentstats"
+//	when
+//		Item meter1_amp received update
+//		or Item meter2_amp received update
+//		or Item meter3_amp received update
+//	then	
+//	 
+//	if( meter1_amp.state >=0 && meter2_amp.state >=0 && meter3_amp.state >=0){
+//	var Number totalCurrent = meter1_amp.state as DecimalType + meter2_amp.state as DecimalType + meter3_amp.state as DecimalType 
+//		if (totalCurrent >=0) postUpdate( HEM_C, totalCurrent )
+//	}
+//end

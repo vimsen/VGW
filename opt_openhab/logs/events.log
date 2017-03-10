@@ -1,0 +1,44 @@
+2015-12-20 22:28:24 - SunRiseTime state updated to 07:37
+2015-12-20 22:28:24 - SunSetTime state updated to 17:08
+2015-12-20 22:28:24 - TdHumidity state updated to 0.67
+2015-12-20 22:28:24 - Tdsummary state updated to Clear throughout the day.
+2015-12-20 22:28:25 - TdtempMax state updated to 12.78
+2015-12-20 22:28:25 - TdtempMin state updated to 6.27
+2015-12-20 22:28:25 - TdcloudCover state updated to 0.13
+2015-12-20 22:28:25 - Tdprecip state updated to 0
+2015-12-20 22:28:25 - TdprecipInt state updated to 0
+2015-12-20 22:28:25 - TdwindSpeed state updated to 4.56
+2015-12-20 22:28:25 - THumidity state updated to 0.65
+2015-12-20 22:28:25 - Tsummary state updated to Clear throughout the day.
+2015-12-20 22:28:25 - TtempMax state updated to 16.04
+2015-12-20 22:28:25 - TtempMin state updated to 5.89
+2015-12-20 22:28:25 - TcloudCover state updated to 0
+2015-12-20 22:28:25 - Tprecip state updated to 0
+2015-12-20 22:28:25 - TprecipInt state updated to 0
+2015-12-20 22:28:25 - TwindSpeed state updated to 2.79
+2015-12-20 22:28:25 - CHumidity state updated to 0.64
+2015-12-20 22:28:25 - Csummary state updated to Clear
+2015-12-20 22:28:25 - CTemperature state updated to 11.54
+2015-12-20 22:28:25 - CcloudCover state updated to 0.16
+2015-12-20 22:28:25 - Cprecip state updated to 0
+2015-12-20 22:28:25 - CprecipInt state updated to 0
+2015-12-20 22:28:25 - CwindSpeed state updated to 4.71
+2015-12-20 22:28:25 - CwindBearing state updated to 6
+2015-12-20 22:28:25 - CdewPoint state updated to 4.94
+2015-12-20 22:28:25 - Cozone state updated to 325.56
+2015-12-20 22:28:25 - FibaroPlug_1_power state updated to 0
+2015-12-20 22:28:25 - Cpressure state updated to 1030.23
+2015-12-20 22:28:26 - FibaroPlug_1_energy state updated to 0
+2015-12-20 22:28:28 - CprecipType state updated to rain
+2015-12-20 22:28:28 - FibaroPlug_1_energy state updated to 0
+2015-12-20 22:28:28 - FibaroPlug_1 state updated to OFF
+2015-12-20 22:28:28 - Time state updated to 2015-12-20T22:28:26
+2015-12-20 22:28:28 - Date state updated to 2015-12-20T22:28:26
+2015-12-20 22:28:32 - Weather_Temperature state updated to 10
+2015-12-20 22:29:00 - FibaroPlug_1 received command ON
+2015-12-20 22:29:00 - FibaroPlug_1 state updated to ON
+2015-12-20 22:29:01 - FibaroPlug_1_power state updated to 4.9
+2015-12-20 22:29:04 - FibaroPlug_1 received command OFF
+2015-12-20 22:29:05 - FibaroPlug_1 state updated to OFF
+2015-12-20 22:29:05 - FibaroPlug_1_power state updated to 0
+2015-12-20 22:29:31 - Weather_Temperature state updated to 10

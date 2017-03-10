@@ -1,0 +1,30 @@
+import org.openhab.core.library.types.*
+import org.openhab.core.persistence.*
+import org.openhab.model.script.actions.*
+//import org.openhab.action.*
+import org.joda.time.*
+
+rule "Turn (demo) LR lights on at 18:30"
+when
+      Time cron "0 30 18 * * ?"
+then
+	executeCommandLine("sudo /home/pi/rcswitch-pi/send 2 2 2 1")
+//        notifyMyAndroid("VIMSEN", "LR Lights Turned ON!", 0)
+//  	  pushNotification("VIMSEN", "LR Lights Turned ON now")
+        pushover("VGW - LR Lights Turned ON!",0)
+
+}
+end
+
+rule "Turn (demo) LR lights off at 18:40"
+when
+      Time cron "0 40 18 * * ?"
+then
+        executeCommandLine("sudo /home/pi/rcswitch-pi/send 2 2 2 0")
+//        notifyMyAndroid("VIMSEN", "LR Floor Lights Turned OFF!", 0)
+//        pushNotification("VIMSEN", "LR Floor Turned OFF")
+        pushover("VGW - LR Lights Turned ON!",0)
+//	say("Lights turned off")
+}
+end
+

@@ -1,0 +1,240 @@
+import org.openhab.core.library.types.*
+import org.openhab.core.persistence.*
+import org.openhab.model.script.actions.*
+import org.joda.time.*
+import org.openhab.core.types.Command
+import org.apache.commons.mail.*
+import org.openhab.action.*
+import org.openhab.binding.*
+ 
+var Timer tIndoorLights
+var Number counter = 1
+var Timer timer = null
+
+rule "PushNotif test"
+when
+	Time cron "0 30 5 * * ?"
+then
+	pushNotification("VIMSEN", This is an Emergency")
+end
+
+rule "e-mail"
+when
+	System started
+then
+//	sendCommand(itm_uber1_light_sta, ON)
+	sendMail("glimperop@gmail.com", "OPENHAB started", "NOW")
+end
+
+
+rule "Voice Control"
+when
+	Item VoiceCommand received command
+then
+/* *
+	var String isaid = switch(receivedCommand.toString.lowerCase) {
+	case "lights on" : 1
+	case "lights off": 0
+	case "light on"  : 1
+	case "light off" : 0
+	case "lights" : 1
+	case "light" : 1
+}
+*/
+logDebug("rule", "Case: " + isaid)
+executeCommandLine("sudo /home/pi/rcswitch-pi/send 2 2 3 1")
+//say("OK")
+sendCommand(itm_uber1_light_sta, ON)
+//itm_uber1_light_sta.sendCommand(ON)
+sendMail("glimperop@gmail.com", "lights ...." , "...lights...")
+end
+
+rule "React to sunset"
+when
+        Time cron "0 15 13 * * ?"   // Every day 13:15 hours, evaluate sunset
+then
+    var year   = now.getYear
+    var month  = now.getMonthOfYear
+    var day    = now.getDayOfMonth
+    var datum  = year+"-"+month+"-"+day+" "+ SunSetTime.state
+    logInfo("Sunset","datum = " + datum)
+    var DateTime sunset = parse(year+"-"+month+"-"+day+"T"+ SunSetTime.state)
+    var minutes = 15  // minutes before sunset
+ 
+    /*
+     * Indoor Lights
+     */
+ 
+    // Cancel timer to avoid reschedule
+ //   if(tIndoorLights!=null) {
+ //       logInfo("Sunset","Timer tIndoorLights cancelled")
+ //       tIndoorLights.cancel()
+ //   }
+    logInfo("Sunset","Timer tIndoorLights created")
+  //  tIndoorLights = createTimer(sunset.minusMinutes(minutes)) [|
+   //     logInfo("Sunset","Timer tIndoorLights executed")
+        
+   //     sendCommand(Z_Fireplace, ON)
+  //      sendCommand(Z_Dining, ON)     
+ //   ]
+
+end
+
+/* Uber sensor rules */
+/* -------------  Uber Sensor -------------------- */
+rule "Uber Lighs"
+        when
+                Item itm_uber1_light_mqtt received update
+        then
+                if(itm_uber1_light_mqtt.state < 350)
+                {
+                        sendCommand(itm_uber1_light_sta, OFF)
+                }
+                else
+                {
+                         sendCommand(itm_uber1_light_sta, ON)
+                }
+end
+
+
+/*-----  uber - gas/smoke ---------- */
+rule "Uber gas smoke threshold"
+        when
+                Item itm_uber1_gas_mqtt received update
+        then
+                if((itm_uber1_gas_mqtt.state > 220) && (itm_uber1_gas_alm_enb.state == ON))
+                {
+                        sendCommand(itm_uber1_gas_alm_sta, ON)
+                }
+end
+
+rule "Uber gas smoke response"
+        when
+                Item itm_uber1_gas_alm_sta changed from OFF to ON
+        then
+        sendMail("glimperop@gmail.com", "gas / smoke" , "gas or smoke detected")
+                //playSound("ding.mp3")
+                postUpdate(itm_uber1_gas_time, new DateTimeType())
+end
+
+/* --------- uber flame ---------- */
+rule "Uber flame threshold"
+        when
+                Item itm_uber1_flame_mqtt received update
+        then
+                if((itm_uber1_flame_mqtt.state < 900) && (itm_uber1_flame_alm_enb.state == ON))
+                {
+                        sendCommand(itm_uber1_flame_alm_sta, ON)
+                }
+end
+
+rule "Uber flame response"
+        when
+                Item itm_uber1_flame_alm_sta changed from OFF to ON
+        then
+                sendMail("glimperop@gmail.com", "fire detected" , "fire detected")
+                //playSound("ding.mp3")
+                postUpdate(itm_uber1_flame_time, new DateTimeType())
+end
+
+
+/* --------- uber bark ---------- */
+rule "Uber bark threshold"
+        when
+                Item itm_uber1_bark_mqtt received update
+        then
+                if(itm_uber1_bark_alm_enb.state == ON)
+                {
+                        sendCommand(itm_uber1_bark_alm_sta, ON)
+                }
+end
+
+rule "Uber bark response"
+        when
+                Item itm_uber1_bark_alm_sta changed from OFF to ON
+        then
+                sendMail("glimperop@gmail.com", "bark detected" , "dog barked!!!")
+                //playSound("ding.mp3")
+                postUpdate(itm_uber1_bark_time, new DateTimeType())
+end
+
+/* --------- uber pir ---------- */
+rule "Uber pir threshold"
+        when
+                Item itm_uber1_pir_mqtt received update
+        then
+                if(itm_uber1_pir_alm_enb.state == ON)
+                {
+                        sendCommand(itm_uber1_pir_alm_sta, ON)
+                }
+end
+
+rule "Uber pir response"
+        when
+                Item itm_uber1_pir_alm_sta changed from OFF to ON
+        then
+                sendMail("glimperop@gmail.com", "pir detected" , "dog pired!!!")
+                //playSound("ding.mp3")
+                postUpdate(itm_uber1_pir_time, new DateTimeType())
+
+/*
+rule "Periodically check presence"
+when
+    Time cron "0 */5 * * * ?"
+then
+        if (Presence.state == ON)
+        {
+                if(gMobiles.members.filter(s | s.state == ON).size == 0) {
+                        logInfo("PresenceCheck", "No phone within reach, checking for flapping")
+                        if(gMobiles.members.filter(s | s.changedSince(now.minusMinutes(5))).size == 0) {
+                                logInfo("PresenceCheck", "Nobody is at home")
+                                sendCommand(Presence, OFF)
+                        }
+                }
+        }
+        else
+        {
+                //For initialisation. If Presence is undefined or off, although it should be on.
+                if(gMobiles.members.filter(s | s.state == ON).size > 0) {
+                        sendCommand(Presence, ON)
+                }
+                else if (Presence.state == Undefined || Presence.state == Uninitialized) {
+                        sendCommand(Presence, OFF)
+                }
+        }
+
+end
+
+rule "Coming home"
+when
+        Item gMobiles changed
+then
+        if (Presence.state != ON) {
+                if(gMobiles.members.filter(s | s.state == ON).size > 0) {
+                        logInfo("PresenceCheck", "Somebody is home")
+                        sendCommand(Presence, ON)
+                }
+        }
+
+end
+*/
+
+// Creates an item that stores the last update time of this item
+rule "Records last weather update time"
+when
+  Item Weather_Temperature received update
+then
+  postUpdate(Weather_LastUpdate, new DateTimeType())
+end
+
+
+rule "Update max and min temperatures"
+when
+        Item Weather_Temperature changed or
+        Time cron "0 0 0 * * ?" or
+        System started
+then
+        postUpdate(Weather_Temp_Max, Weather_Temperature.maximumSince(now.toDateMidnight).state)
+        postUpdate(Weather_Temp_Min, Weather_Temperature.minimumSince(now.toDateMidnight).state)
+end
+

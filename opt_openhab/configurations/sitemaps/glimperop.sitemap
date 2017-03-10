@@ -1,0 +1,109 @@
+sitemap glimperop label="VIMSEN-GW" {  
+   Frame label="Date" {
+       Text item=Date
+    }
+     Frame label="Weather (Outdoors)" {
+               Text item=Weather_Temperature valuecolor=[Weather_LastUpdate=="Uninitialized"="lightgray",Weather_LastUpdate>90="lightgray",>25="orange",>15="green",>5="orange",<=5="blue"] {
+                         Frame {
+                                Switch item=Weather_Chart_Period label="" mappings=[0="Hour", 1="Day", 2="Week"]
+                                Chart item=Weather_Chart period=h refresh=600 visibility=[Weather_Chart_Period==0, Weather_Chart_Period=="Uninitialized"]
+                                Chart item=Weather_Chart period=D refresh=3600 visibility=[Weather_Chart_Period==1]
+                                Chart item=Weather_Chart period=W refresh=3600 visibility=[Weather_Chart_Period==2]
+                        }                
+        }
+
+	Text item=forecastio {
+     		Text item=current {
+                Frame {
+//              Text item=CtimeISO
+                Text item=Csummary
+                Text item=CHumidity
+                Text item=CTemperature
+                Text item=CdewPoint
+                Text item=Cpressure
+                Text item=Cozone
+                Text item=CcloudCover
+                Text item=CprecipType
+                Text item=Cprecip
+                Text item=CprecipInt
+                Text item=CwindSpeed
+                Text item=CwindBearing
+        }
+        }
+        Text item=today {
+                Frame {
+                Text item=SunRiseTime
+                Text item=SunSetTime
+                Text item=Tdsummary
+                Text item=TdHumidity
+                Text item=TdtempMax
+                Text item=TdtempMin
+                Text item=TdcloudCover
+                Text item=Tdprecip
+                Text item=TdprecipInt
+                Text item=TdwindSpeed
+        }
+        }
+        Text item=tomorrow {
+                Frame {
+                Text item=Tsummary
+                Text item=THumidity
+                Text item=TtempMax
+                Text item=TtempMin
+                Text item=TcloudCover
+                Text item=Tprecip
+                Text item=TprecipInt
+                Text item=TwindSpeed
+                }
+                }
+	}
+	}
+
+   Frame label="MY-HOME" {
+
+        Text item=ProdCons {
+   	Text item=PV1_production_power
+	Text item=PV1_production_battery_percentage
+    	Text item=total_energy_consumption_300 
+         Frame {
+                Switch item=ProdCons_Chart_Period label="" mappings=[0="Hour", 1="Day", 2="Week"]
+                Chart item=ProdCons_Chart period=h refresh=600 visibility=[ProdCons_Chart_Period==0, ProdCons_Chart_Period=="Uninitialized"]
+                Chart item=ProdCons_Chart period=D refresh=3600 visibility=[ProdCons_Chart_Period==1]
+                Chart item=ProdCons_Chart period=W refresh=3600 visibility=[ProdCons_Chart_Period==2]
+                }
+	
+        Text item=Power { 
+	Frame {
+        Text item=meter1_power
+        Text item=meter2_power
+        Text item=meter3_power
+        Frame {
+                Switch item=Power_Chart_Period label="" mappings=[0="Hour", 1="Day", 2="Week"]
+                Chart item=Power_Chart period=h refresh=600 visibility=[Power_Chart_Period==0, Power_Chart_Period=="Uninitialized"]
+                Chart item=Power_Chart period=D refresh=3600 visibility=[Power_Chart_Period==1]
+                Chart item=Power_Chart period=W refresh=3600 visibility=[Power_Chart_Period==2]
+                }
+//		Frame {Text item=Realtime {Webview  url="http://94.70.143.113/~glimperop/vimsen/Power_3phases.html"  height=14 }}
+
+        }
+        }
+
+
+        Text item=Outlets {
+        Frame label="Fibaro1" {
+        Switch item=FibaroPlug_1 label="Heating@Sofa"
+        Text item=FibaroPlug_1_power { Frame {
+              Switch item=FibPlug1_Chart_Period label="Heating" mappings=[0="Hour", 1="Day", 2="Week"]
+              Chart item=FibPlug1_Chart period=h refresh=600 visibility=[FibPlug1_Chart_Period==0, FibPlug1_Chart_Period=="Uninitialized"]
+              Chart item=FibPlug1_Chart period=D refresh=3600 visibility=[FibPlug1_Chart_Period==1]
+              Chart item=FibPlug1_Chart period=W refresh=3600 visibility=[FibPlug1_Chart_Period==2]
+		} }
+        Text item=FibaroPlug_1_energy
+        }
+
+        }
+
+}
+ 
+}
+

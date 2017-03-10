@@ -1,0 +1,184 @@
+----- IP Changed? ----
+2016-09-30 19:09:01.228726
+----- New Round -------
+Fri 30 Sep 19:18:01 UTC 2016
+tun0 is up - no actions required!
+Check 1 - OK
+Check 2 - Pinging 8.8.8.8
+Try 0: 4 4 	
+Try 1: 4 4 	
+Try 2: 4 4 	
+Try 3: 4 4 	
+Try 4: 4 4 	
+The VGW is connected to the Internet. Will check again in 10 mins!
+----- IP Changed? ----
+2016-09-30 19:19:01.678365
+cIP: 10.8.0.22
+oIP: 10.8.0.10
+2016-09-30 19:19:01.681848
+IPs don't match! Sending e-mail and Updating ip.txt
+successfully sent the mail (10.8.0.22)
+----- New Round -------
+Fri 30 Sep 19:28:01 UTC 2016
+tun0 is up - no actions required!
+Check 1 - OK
+Check 2 - Pinging 8.8.8.8
+Try 0: 4 4 	
+Try 1: 4 4 	
+Try 2: 4 4 	
+Try 3: 4 4 	
+Try 4: 4 4 	
+The VGW is connected to the Internet. Will check again in 10 mins!
+----- IP Changed? ----
+2016-09-30 19:29:02.163973
+cIP: 10.8.0.22
+oIP: 10.8.0.22
+IP addresses match! No action Required!
+----- New Round -------
+Fri 30 Sep 19:38:01 UTC 2016
+tun0 is up - no actions required!
+Check 1 - OK
+Check 2 - Pinging 8.8.8.8
+Try 0: 4 4 	
+Try 1: 4 4 	
+Try 2: 4 4 	
+Try 3: 4 4 	
+Try 4: 4 4 	
+The VGW is connected to the Internet. Will check again in 10 mins!
+----- IP Changed? ----
+2016-09-30 19:39:01.374998
+cIP: 10.8.0.22
+oIP: 10.8.0.22
+IP addresses match! No action Required!
+----- New Round -------
+Fri 30 Sep 19:48:01 UTC 2016
+tun0 is up - no actions required!
+Check 1 - OK
+Check 2 - Pinging 8.8.8.8
+Try 0: 4 4 	
+Try 1: 4 4 	
+Try 2: 4 4 	
+Try 3: 4 4 	
+Try 4: 4 4 	
+The VGW is connected to the Internet. Will check again in 10 mins!
+----- IP Changed? ----
+2016-09-30 19:49:01.577385
+cIP: 10.8.0.22
+oIP: 10.8.0.22
+IP addresses match! No action Required!
+----- New Round -------
+Fri 30 Sep 19:58:01 UTC 2016
+tun0 is up - no actions required!
+Check 1 - OK
+Check 2 - Pinging 8.8.8.8
+Try 0: 4 4 	
+Try 1: 4 4 	
+Try 2: 4 4 	
+Try 3: 4 4 	
+Try 4: 4 4 	
+The VGW is connected to the Internet. Will check again in 10 mins!
+----- IP Changed? ----
+2016-09-30 19:59:01.826969
+cIP: 10.8.0.22
+oIP: 10.8.0.22
+IP addresses match! No action Required!
+----- New Round -------
+Fri 30 Sep 20:08:01 UTC 2016
+tun0 is up - no actions required!
+Check 1 - OK
+Check 2 - Pinging 8.8.8.8
+Try 0: 4 4 	
+Try 1: 4 4 	
+Try 2: 4 4 	
+Try 3: 4 4 	
+Try 4: 4 4 	
+The VGW is connected to the Internet. Will check again in 10 mins!
+----- IP Changed? ----
+2016-09-30 20:09:01.998221
+cIP: 10.8.0.22
+oIP: 10.8.0.22
+IP addresses match! No action Required!
+----- IP Changed? ----
+2016-09-30 20:19:17.161515
+----- New Round -------
+Fri 30 Sep 20:28:01 UTC 2016
+tun0 is up - no actions required!
+Check 1 - OK
+Check 2 - Pinging 8.8.8.8
+Try 0: 4 4 	
+Try 1: 4 4 	
+Try 2: 4 4 	
+Try 3: 4 4 	
+Try 4: 4 4 	
+The VGW is connected to the Internet. Will check again in 10 mins!
+----- IP Changed? ----
+2016-09-30 20:29:01.394681
+cIP: 10.8.0.42
+oIP: 10.8.0.22
+2016-09-30 20:29:01.398133
+IPs don't match! Sending e-mail and Updating ip.txt
+successfully sent the mail (10.8.0.42)
+----- New Round -------
+Fri 30 Sep 20:38:01 UTC 2016
+tun0 is up - no actions required!
+Check 1 - OK
+Check 2 - Pinging 8.8.8.8
+Try 0: 4 4 	
+Try 1: 4 4 	
+Try 2: 4 4 	
+Try 3: 4 4 	
+Try 4: 4 4 	
+The VGW is connected to the Internet. Will check again in 10 mins!
+----- IP Changed? ----
+2016-09-30 20:39:01.897177
+cIP: 10.8.0.42
+oIP: 10.8.0.42
+IP addresses match! No action Required!
+----- New Round -------
+Fri 30 Sep 20:48:01 UTC 2016
+tun0 is up - no actions required!
+Check 1 - OK
+Check 2 - Pinging 8.8.8.8
+Try 0: 4 4 	
+Try 1: 4 4 	
+Try 2: 4 4 	
+Try 3: 4 4 	
+Try 4: 4 4 	
+The VGW is connected to the Internet. Will check again in 10 mins!
+----- IP Changed? ----
+2016-09-30 20:49:02.008998
+cIP: 10.8.0.42
+oIP: 10.8.0.42
+IP addresses match! No action Required!
+----- New Round -------
+Fri 30 Sep 20:58:01 UTC 2016
+tun0 is up - no actions required!
+Check 1 - OK
+Check 2 - Pinging 8.8.8.8
+Try 0: 4 4 	
+Try 1: 4 4 	
+Try 2: 4 4 	
+Try 3: 4 4 	
+Try 4: 4 4 	
+The VGW is connected to the Internet. Will check again in 10 mins!
+----- IP Changed? ----
+2016-09-30 20:59:01.267923
+cIP: 10.8.0.42
+oIP: 10.8.0.42
+IP addresses match! No action Required!
+----- New Round -------
+Fri 30 Sep 21:08:01 UTC 2016
+tun0 is up - no actions required!
+Check 1 - OK
+Check 2 - Pinging 8.8.8.8
+Try 0: 4 4 	
+Try 1: 4 4 	
+Try 2: 4 4 	
+Try 3: 4 4 	
+Try 4: 4 4 	
+The VGW is connected to the Internet. Will check again in 10 mins!
+----- IP Changed? ----
+2016-09-30 21:09:01.500880
+cIP: 10.8.0.42
+oIP: 10.8.0.42
+IP addresses match! No action Required!

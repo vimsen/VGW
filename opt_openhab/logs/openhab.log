@@ -1,0 +1,114 @@
+2015-12-20 22:27:47.472 [INFO ] [.o.core.internal.CoreActivator] - openHAB runtime has been started (v1.7.1).
+2015-12-20 22:27:54.549 [INFO ] [o.o.i.s.i.DiscoveryServiceImpl] - mDNS service has been started
+2015-12-20 22:27:54.731 [INFO ] [o.o.i.s.i.DiscoveryServiceImpl] - Service Discovery initialization completed.
+2015-12-20 22:27:54.749 [INFO ] [.io.transport.mqtt.MqttService] - MQTT Service initialization completed.
+2015-12-20 22:27:54.752 [INFO ] [o.i.t.m.i.MqttBrokerConnection] - Starting MQTT broker connection 'mymosquitto'
+2015-12-20 22:28:02.760 [INFO ] [c.internal.ModelRepositoryImpl] - Loading model 'glimperop.script'
+2015-12-20 22:28:03.894 [INFO ] [c.internal.ModelRepositoryImpl] - Loading model 'logging.persist'
+2015-12-20 22:28:04.029 [INFO ] [c.internal.ModelRepositoryImpl] - Loading model 'exec.persist'
+2015-12-20 22:28:04.077 [INFO ] [c.internal.ModelRepositoryImpl] - Loading model 'rrd4j.persist'
+2015-12-20 22:28:04.113 [INFO ] [c.internal.ModelRepositoryImpl] - Loading model 'mysql.persist'
+2015-12-20 22:28:04.268 [INFO ] [c.internal.ModelRepositoryImpl] - Loading model 'glimperop.items'
+2015-12-20 22:28:04.668 [INFO ] [.o.u.w.i.servlet.WebAppServlet] - Started Classic UI at /openhab.app
+2015-12-20 22:28:13.744 [INFO ] [t.AbstractSocketChannelBinding] - The maximum buffer will be set to the default value of 1024
+2015-12-20 22:28:13.746 [INFO ] [t.AbstractSocketChannelBinding] - The interval to retry connection setups will be set to the default value of 5
+2015-12-20 22:28:13.749 [INFO ] [t.AbstractSocketChannelBinding] - The cron job to reset connections will be set to the default value of 0 0 0 * * ?
+2015-12-20 22:28:13.751 [INFO ] [t.AbstractSocketChannelBinding] - The setting to queue write operation until a channel gets connected will be set to the default value of true
+2015-12-20 22:28:13.753 [INFO ] [t.AbstractSocketChannelBinding] - The port to listen for incoming connections will be set to the default value of 0
+2015-12-20 22:28:13.755 [INFO ] [t.AbstractSocketChannelBinding] - The setting to share channels within an Item will be set to the default value of true
+2015-12-20 22:28:13.756 [INFO ] [t.AbstractSocketChannelBinding] - The setting to share channels between the items with the same direction will be set to the default value of true
+2015-12-20 22:28:13.758 [INFO ] [t.AbstractSocketChannelBinding] - The setting to share channels between directions will be set to the default value of true
+2015-12-20 22:28:13.760 [INFO ] [t.AbstractSocketChannelBinding] - The setting to use address masks for incoming connections will be set to the default value of true
+2015-12-20 22:28:13.764 [INFO ] [t.protocol.internal.TCPBinding] - The maximum time out for blocking write operations will be set to the default vaulue of 3000
+2015-12-20 22:28:13.764 [INFO ] [.service.AbstractActiveService] - TCP Refresh Service has been started
+2015-12-20 22:28:13.766 [INFO ] [t.protocol.internal.TCPBinding] - The blocking nature of read/write operations will be set to the default vaulue of false
+2015-12-20 22:28:13.768 [INFO ] [t.protocol.internal.TCPBinding] - The preamble for all write operations will be set to the default vaulue of 
+2015-12-20 22:28:13.770 [INFO ] [t.protocol.internal.TCPBinding] - The postamble for all write operations will be set to the default vaulue of 
+
+2015-12-20 22:28:13.772 [INFO ] [t.protocol.internal.TCPBinding] - Updating states with returned values will be set to the default vaulue of true
+2015-12-20 22:28:13.774 [INFO ] [t.protocol.internal.TCPBinding] - The characterset will be set to the default vaulue of ASCII
+2015-12-20 22:28:14.432 [INFO ] [.service.AbstractActiveService] - SNMP Refresh Service has been started
+2015-12-20 22:28:15.127 [INFO ] [c.internal.ModelRepositoryImpl] - Loading model 'voicecom.rules'
+2015-12-20 22:28:16.435 [INFO ] [c.internal.ModelRepositoryImpl] - Loading model 'glimperop.sitemap'
+2015-12-20 22:28:16.972 [INFO ] [.z.internal.ZWaveActiveBinding] - Update config, port = /dev/ttyUSB0
+2015-12-20 22:28:16.975 [INFO ] [.service.AbstractActiveService] - ZWave Refresh Service has been started
+2015-12-20 22:28:19.355 [INFO ] [b.z.i.protocol.ZWaveController] - Starting Z-Wave controller
+2015-12-20 22:28:19.357 [INFO ] [b.z.i.protocol.ZWaveController] - Z-Wave timeout is set to 5000ms.
+2015-12-20 22:28:19.358 [INFO ] [b.z.i.protocol.ZWaveController] - Connecting to serial port /dev/ttyUSB0
+2015-12-20 22:28:19.527 [INFO ] [b.z.i.protocol.ZWaveController] - Serial port is initialized
+2015-12-20 22:28:20.009 [INFO ] [.service.AbstractActiveService] - NetworkHealth Refresh Service has been started
+2015-12-20 22:28:20.195 [INFO ] [rialApiGetInitDataMessageClass] - NODE 1: Node found
+2015-12-20 22:28:20.197 [INFO ] [rialApiGetInitDataMessageClass] - NODE 5: Node found
+2015-12-20 22:28:20.200 [INFO ] [rialApiGetInitDataMessageClass] - ZWave Controller using Controller API
+2015-12-20 22:28:20.202 [INFO ] [rialApiGetInitDataMessageClass] - ZWave Controller is Primary Controller
+2015-12-20 22:28:20.203 [INFO ] [rialApiGetInitDataMessageClass] - ------------Number of Nodes Found Registered to ZWave Controller------------
+2015-12-20 22:28:20.206 [INFO ] [rialApiGetInitDataMessageClass] - # Nodes = 2
+2015-12-20 22:28:20.207 [INFO ] [rialApiGetInitDataMessageClass] - ----------------------------------------------------------------------------
+2015-12-20 22:28:23.052 [INFO ] [.service.AbstractActiveService] - Exec Refresh Service has been started
+2015-12-20 22:28:24.385 [WARN ] [.o.b.z.i.p.c.ZWaveCommandClass] - Unsupported command class MULTI_INSTANCE_ASSOCIATION (0x8e)
+2015-12-20 22:28:24.392 [WARN ] [.o.b.z.i.p.c.ZWaveCommandClass] - Unsupported command class POWERLEVEL (0x73)
+2015-12-20 22:28:24.400 [WARN ] [.o.b.z.i.p.c.ZWaveCommandClass] - Unsupported command class FIRMWARE_UPDATE_MD (0x7a)
+2015-12-20 22:28:26.305 [INFO ] [.myopenhab.internal.MyOHClient] - Connected to my.openHAB service (UUID = 688345f7-9fec-4ba4-832f-24afcae05950, base URL = http://localhost:8080)
+2015-12-20 22:28:26.470 [INFO ] [.service.AbstractActiveService] - NTP Refresh Service has been started
+2015-12-20 22:28:26.698 [INFO ] [.service.AbstractActiveService] - HTTP Refresh Service has been started
+2015-12-20 22:28:41.835 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:28:41.839 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:28:41.840 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:28:41.845 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:28:41.848 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:28:41.850 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:00.710 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:00.714 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:00.717 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:00.721 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:00.725 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:00.727 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:00.730 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:00.735 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:00.738 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:00.748 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:00.753 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:00.755 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:01.299 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:01.303 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:01.305 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:01.309 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:01.312 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:01.314 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:01.792 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:01.796 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:01.799 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:01.806 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:01.811 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:01.814 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:05.364 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:05.367 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:05.369 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:05.372 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:05.376 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:05.379 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:05.421 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:05.426 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:05.429 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:05.433 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:05.438 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:05.440 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:06.150 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:06.154 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:06.156 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:06.159 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:06.159 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:06.163 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:06.163 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:06.165 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:06.165 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:06.170 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:06.175 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:06.177 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:31.979 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:31.982 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:31.984 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item CAM_work for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:31.988 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:31.991 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:29:31.993 [ERROR] [o.u.i.items.ItemUIRegistryImpl] - Cannot retrieve item myWeather for widget org.openhab.model.sitemap.Text
+2015-12-20 22:30:30.715 [INFO ] [.o.u.w.i.servlet.WebAppServlet] - Stopped Classic UI

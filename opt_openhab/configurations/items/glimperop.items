@@ -1,0 +1,46 @@
+// MAC = b8:27:eb:b8:77:56 -- topic = b827ebb87756
+String	Power	"Power per Phase (W)"
+String	meter	"Current Consumption (KWh)"
+// HEM is Node 03 
+Number  PV1_production_battery_percentage "Battery Percentage [%.2f] (%)" {mqtt="<[mymosquitto:hedno/b827ebb87756/state/batterypercent/:state:default]"}
+Number  meter1_power    "Phase 1 [%.2f W]"      (Power_Chart)   { zwave="03:1:command=meter,meter_scale=E_W,refresh_interval=10" }
+Number  meter2_power    "Phase 2 [%.2f W]"      (Power_Chart)   { zwave="03:2:command=meter,meter_scale=E_W,refresh_interval=10" }
+Number  meter3_power    "Phase 3 [%.2f W]"      (Power_Chart)   { zwave="03:3:command=meter,meter_scale=E_W,refresh_interval=10" }
+Group   Power_Chart     (Power_Chart)
+Number  Power_Chart_Period "Power_Chart_Period"
+
+Number  HEM_TotalEnergy "Daily Energy [%.2f KWh]"
+Number	meter1_energy	"Phase 1 KWh  [%.2f KWh]"	{ zwave="03:1:command=meter,meter_scale=E_KWh,refresh_interval=180" }
+Number	meter2_energy	"Phase 2 KWh [%.2f KWh]"	{ zwave="03:2:command=meter,meter_scale=E_KWh,refresh_interval=180" }
+Number	meter3_energy	"Phase 3 KWh [%.2f KWh]"	{ zwave="03:3:command=meter,meter_scale=E_KWh,refresh_interval=180" }
+Number	total_energy_consumption_300	"Overall Consumption [%.2f KWh]" { zwave="03:0:command=meter,meter_scale=E_KWh,refresh_interval=300" }
+
+Group	ProdCons_Chart	(ProdCons_Chart)	
+Number	PV1_production_power	"RES-Production [%.2f KW]"	(ProdCons_Chart)	{ mqtt="<[mymosquitto:hedno/b827ebb87756/state/production/:state:default]" }
+Number	ProdCons_Chart_Period	"ProdCons_Chart_Period"
+
+String	Outlets	"Consumption Per Socket (W, KWh)"
+Switch	FibaroPlug_1	"Fibaro_1"	(Outlets)					{ zwave="3:command=switch_binary" }
+Number	FibaroPlug_1_power	"Current Power [%.2f W]"	(FibPlug1_Chart)	{ zwave="3:command=sensor_multilevel,refresh_interval=10" }
+Number	FibaroPlug_1_energy	"Total Consumption [%.2f KWh]"	(Fib1energy)		{ zwave="3:command=meter" }
+Group	FibPlug1_Chart	(FibPlug1_Chart)	
+Number	FibPlug1_Chart_Period	"FibPlug1_Chart_Period"
+
+//Switch	FibaroPlug_2	"Fibaro_2"	(Outlets)					{ zwave="10:command=switch_binary" }
+//Number	FibaroPlug_2_power	"Current Power [%.2f W]"	(FibPlug2_Chart)	{ zwave="10:command=sensor_multilevel" }
+//Number	FibaroPlug_2_energy	"Total Consumption [%.2f KWh]"	(Fib2energy)		{ zwave="10:command=meter" }
+//Group	FibPlug2_Chart	(FibPlug2_Chart)	
+//Number	FibPlug2_Chart_Period	"FibPlug2_Chart_Period"
+
+//Switch	itm_uber1_light_sta	"LRoom FloorLight"	{ exec="OFF:sudo /home/pi/rcswitch-pi/send 2 2 3 0, ON:sudo /home/pi/rcswitch-pi/send 2 2 3 1" }
+//Switch	itm_uber2_light_sta	"Sofa FloorLight"	{ exec="OFF:sudo /home/pi/rcswitch-pi/send 2 2 1 0, ON:sudo /home/pi/rcswitch-pi/send 2 2 1 1" }
+//Switch	itm_uber3_light_sta	"Sofa MainLight"	{ exec="OFF:sudo /home/pi/rcswitch-pi/send 2 2 2 0, ON:sudo /home/pi/rcswitch-pi/send 2 2 2 1" }
+
+Group	Weather_Chart	(Weather)	
+Number	Weather_Temperature	"Yahoo (now) [%.1f °C]"	<temperature>	(Weather_Chart)		{ http="<[http://weather.yahooapis.com/forecastrss?w=946738&u=c:60000:XSLT(yahoo_weather_temperature.xsl)]" }
+Number	Weather_Chart_Period	"Chart Period"
+DateTime	Weather_LastUpdate	"Last Update [%1$ta %1$tR]"	<clock>
+DateTime	Date	"Date [%1$tA, %1$td.%1$tm.%1$tY]"	<calendar>	{ ntp="Europe/Berlin:de_DE" }
+
+//String	Alarms	"Alarms: View/Modify"
+

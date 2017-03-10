@@ -1,0 +1,2 @@
+greece/attica/Maroussi/LP5/
+{"_type": "dev2", "lat": "38.1935", "lon": "23.6379", "production": "80W", "consumption": "0W", "temp": "22.5", "humi": "55.5", "CO2": "-", "rain":"-", "w_speed":"-", "batt":"0.6KW", "tst": "1431957928" }

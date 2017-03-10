@@ -1,0 +1,175 @@
+import org.openhab.core.library.types.*
+import org.openhab.core.persistence.*
+import org.openhab.model.script.actions.*
+import org.joda.time.* 
+
+/*----- washing machine  ---------- */
+//rule "Washing Machine status"
+//        when
+//                Item power_washing received update
+//        then
+//		logInfo("rule", "power_washing = " + power_washing)
+//                if(power_washing.state > 700)
+//                {
+//                sendCommand(itm_uber1_washing_alm_sta, ON)
+//                } else {
+//                sendCommand(itm_uber1_washing_alm_sta, OFF)
+//		}
+//end
+
+rule "NOTIFY when Washing Machine is ON"
+        when
+          Item itm_uber1_washing_alm_sta changed from OFF to ON
+        then
+	 if (itm_uber1_washing_alm_enb.state == ON) {
+//        sendMail("glimperop@gmail.com", "WASHING MACHINE" , "WASHING MACHINE IS ON")
+          postUpdate(itm_uber1_washing_time, new DateTimeType())
+//          notifyMyAndroid("VIMSEN", "WASHING MACHINE IS ON!", 2)
+//          pushNotification("VIMSEN", "WASHING MACHINE IS ON!")
+          pushover("VGW - Washing Machine is ON!",1)
+	}
+end
+
+
+/*----- DRYER  ---------- */
+//rule "Dryer status"
+//        when
+//                Item power_dryer received update
+//        then
+//              logInfo("rule", "power_dryer = " + power_dryer)
+//                if(power_dryer.state > 700) 
+//                {
+//                sendCommand(itm_uber1_dryer_alm_sta, ON)
+//                } else {
+//                sendCommand(itm_uber1_dryer_alm_sta, OFF)
+//}
+//end
+
+rule "NOTIFY when Dryer is ON"
+        when
+          Item itm_uber1_dryer_alm_sta changed from OFF to ON
+        then
+         if (itm_uber1_dryer_alm_enb.state == ON) {
+//        sendMail("glimperop@gmail.com", "DRYER" , "DRYER IS ON")
+          postUpdate(itm_uber1_dryer_time, new DateTimeType())
+//          notifyMyAndroid("VIMSEN", "DRYER IS ON!", 2)
+//          pushNotification("VIMSEN", "DRYER IS ON!")
+         pushover("VGW - Dryer is ON!",1)
+
+        }
+end
+
+
+rule "Notify When Dryer is Done"
+when
+      Item itm_uber1_dryer_mqtt changed
+then
+	var double w = new Double(itm_uber1_dryer_mqtt.state.toString())
+        logInfo("rule", "w= " + w)
+	var  ww = itm_uber1_consumption_mqtt.state as DecimalType
+	logInfo("rule", "ww= " + ww)
+	var double maxLastHour = new Double(itm_uber1_dryer_mqtt.maximumSince(now.minusHours(1)).state.toString())
+	logInfo("rule", "max= " + maxLastHour)
+	if (ww < 100.0 && maxLastHour > 500.0 && dryer.state == ON) {
+	 // executeCommandLine .....
+//        notifyMyAndroid("VIMSEN", "Dryer is DONE!", 2)
+// 	pushNotification("VIMSEN", "Dryer is DONE")
+        pushover("VGW - Dryer is DONE!",1)
+
+}
+end
+
+rule "Notify When Washing Machine is DONE"
+when
+      Item itm_uber1_washing_mqtt changed
+then
+        var double wmd = new Double(itm_uber1_washing_mqtt.state.toString())
+        var  wwmd = itm_uber1_consumption_mqtt.state as DecimalType
+        var double maxLastHour = new Double(itm_uber1_washing_mqtt.maximumSince(now.minusHours(1)).state.toString())
+        if (wwmd < 100.0 && maxLastHour > 500.0 && washing.state == ON) {
+         // executeCommandLine .....
+//        notifyMyAndroid("VIMSEN", "Washing Machine is DONE!", 2)
+//        pushNotification("VIMSEN", "Washing Machine is DONE")
+        pushover("VGW - Washing Machine is DONE!",1)
+
+}
+end
+
+// If consumption of Washing Machine greater than XXXX, item_uber1_washing .... ON
+// same for washing mashine energy, oven energy, ....
+
+rule "DRYER threshold for STATUS update"
+        when
+           	Item itm_uber1_dryer_mqtt received update
+//		Item power_dryer received update
+        then
+//        	var double w = new Double(itm_uber1_dryer_mqtt.state.toString())
+//      	logInfo("rule", "w= " + w)
+        	var  ww = itm_uber1_dryer_mqtt.state as DecimalType
+//      	logInfo("rule", "ww= " + ww)
+        	var double maxLastHour = new Double(itm_uber1_dryer_mqtt.maximumSince(now.minusHours(1)).state.toString())
+//      	logInfo("rule", "max= " + maxLastHour)
+        	if (ww > 300.0 && maxLastHour > 300.0) {
+          	sendCommand(itm_uber1_dryer_alm_sta, ON)
+                } else {
+                sendCommand(itm_uber1_dryer_alm_sta, OFF)
+}
+end
+
+
+rule "WASHING MACHINE threshold for STATUS update"
+        when
+                 Item itm_uber1_washing_mqtt received update
+        then
+                var double wm = new Double(itm_uber1_washing_mqtt.state.toString())
+//              logInfo("rule", "wm= " + wm)
+                var  wwm = itm_uber1_washing_mqtt.state as DecimalType
+//              logInfo("rule", "ww= " + ww)
+                var double maxLastHour = new Double(itm_uber1_washing_mqtt.maximumSince(now.minusHours(1)).state.toString())
+//              logInfo("rule", "max= " + maxLastHour)
+                if (wwm > 300.0 && maxLastHour > 300.0) {
+                sendCommand(itm_uber1_washing_alm_sta, ON)
+                } else {
+                sendCommand(itm_uber1_washing_alm_sta, OFF)
+}
+end 
+
+/* --------- PIR Activity ---------- */
+rule "PIR threshold"
+        when
+                Item itm_uber1_pir_mqtt_LastSeen received update
+        then
+ //             logInfo("rule", "LastSeen = " + itm_uber1_pir_mqtt_LastSeen)
+ //             logInfo("rule", "Alarm enabled? = " + itm_uber1_pir_alm_enb.state)
+ //             logInfo("rule", "PIR State = " + itm_uber1_pir_mqtt_state.state)
+
+
+		if(itm_uber1_pir_mqtt_state.state == 0 ) 
+		{
+			 sendCommand(itm_uber1_pir_alm_sta, OFF)
+		}
+
+                if(itm_uber1_pir_mqtt_state.state == 1)
+                {
+//			 logInfo("rule", "PIR state? = ON")
+                        sendCommand(itm_uber1_pir_alm_sta, ON)
+                 }
+
+                if((itm_uber1_pir_alm_enb.state == ON) && (itm_uber1_pir_mqtt_state.state == 1) )
+                {
+			  pushover("PIR Activity Detected!",1)
+			  logInfo("rule", "Send Push Notification")
+		}
+end
+
+
+//rule "PIR Activity Response"
+//        when
+//                Item itm_uber1_pir_alm_sta changed from OFF to ON
+//        then
+//              sendMail("glimperop@gmail.com", "pir detected" , "dog pired!!!")
+//                playSound("ding.mp3")
+//                notifyMyAndroid("VIMSEN", "PIR Activity Detected (!!)", 2)
+//                pushNotification("VIMSEN", "PIR Activity Detected (!!)")
+//                postUpdate(itm_uber1_pir_time, new DateTimeType())
+//end

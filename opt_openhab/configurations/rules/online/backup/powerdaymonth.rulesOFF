@@ -1,0 +1,41 @@
+import org.openhab.core.library.types.*
+import org.openhab.core.persistence.*
+import org.openhab.model.script.actions.*
+import org.joda.time.*
+import org.joda.time.format.*
+import java.lang.String
+
+rule "powerdaymonth"
+when
+	Item itm_uber1_consumption_mqtt received update
+then	
+logInfo( "rules.powerdaymonth", "starting..")
+var Number totalPower = itm_uber1_consumption_mqtt.state as DecimalType
+var Number avToday = (itm_uber1_consumption_mqtt.averageSince(now.minusHours(now.getHourOfDay))/1000).intValue
+var Number avMonth = (itm_uber1_consumption_mqtt.averageSince(now.minusDays(now.getDayOfMonth()))/1000).intValue
+var Number avTotal = (itm_uber1_consumption_mqtt.averageSince(now.minusDays(now.getDayOfYear))/1000).intValue
+
+var Number eToday = totalPower - itm_uber1_consumption_mqtt.historicState(now.minusHours(now.getHourOfDay)).state as DecimalType
+var Number eYesterday = totalPower - itm_uber1_consumption_mqtt.historicState(now.minusHours(now.getHourOfDay).minusDays(1)).state as DecimalType
+var Number avYesterday = ((eYesterday - eToday)/24).intValue
+
+//if(totalenergy.historicState(now.minusDays(now.getDayOfMonth())) !=null){
+//	var Number eMonth = totalPower - itm_uber1_consumption_mqtt.historicState(now.minusDays(now.getDayOfMonth())).state as DecimalType
+//	postUpdate( Energy_used_month, eMonth  )
+//	logInfo("eMonth", eMonth)
+//}
+
+logInfo("eToday", eToday)
+logInfo("avToday", avToday)
+logInfo("avYesterday", avYesterday)
+logInfo("avMonth", avMonth)
+logInfo("avTotal", avTotal)
+
+//postUpdate( Energy_used_today, eToday  )
+//postUpdate( AvPower_today, avToday  )
+//postUpdate( AvPower_yesterday, avYesterday )
+//postUpdate( AvPower_month, avMonth  )
+//postUpdate( AvPower_total, avTotal  )
+
+logInfo( "rules.powerdaymonth", "finished..")
+end

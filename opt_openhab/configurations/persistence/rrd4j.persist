@@ -1,0 +1,10 @@
+Strategies {
+	// everyMinute : "0 * * * * ?"
+		default = everyChange
+}
+
+Items {
+	* : strategy = default, restoreOnStartup
+//	Temperature*,Weather_Chart* : strategy = everyMinute, restoreOnStartup
+}
+

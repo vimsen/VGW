@@ -1,0 +1,75 @@
+import org.openhab.core.library.types.*
+import org.openhab.core.persistence.*
+import org.openhab.model.script.actions.*
+import org.joda.time.*
+import org.openhab.action.*
+import org.openhab.binding.*
+ 
+var Timer tIndoorLights
+var Number counter = 1
+var Timer timer = null
+
+rule "PushNotif test"
+when
+	Time cron "0 * * * * ?"
+//	Item itm_uber1_temp_mqtt changed
+then
+	logInfo("PushNotif", "Activated")
+	pushNotification("VIMSEN", "This is an Emergency")
+end
+
+
+rule "StartUp"
+when
+	System started
+then
+       pushNotification("VIMSEN", "OPENHAB System Started")
+	sendMail("1907bbce12200a95e2c43f695f022917a10bb23d@api.prowlapp.com", "OPENHAB started (mail)", "NOW")
+//	sendCommand(itm_uber1_light_sta, ON)
+//	sendMail("glimperop@gmail.com", "OPENHAB started", "NOW")
+end
+
+
+rule "Voice Control"
+when
+	Item VoiceCommand received command
+then
+/* *
+	var String isaid = switch(receivedCommand.toString.lowerCase) {
+	case "lights on" : 1
+	case "lights off": 0
+	case "light on"  : 1
+	case "light off" : 0
+	case "lights" : 1
+	case "light" : 1
+}
+*/
+//logDebug("rule", "Case: " + isaid)
+pushNotification("VIMSEN", "This is an Emergency")
+executeCommandLine("sudo /home/pi/rcswitch-pi/send 2 2 3 1")
+logInfo("rule", "Voice Command Executed")
+//say("OK")
+//sendCommand(itm_uber1_light_sta, ON)
+//itm_uber1_light_sta.sendCommand(ON)
+//sendMail("glimperop@gmail.com", "lights ...." , "...lights...")
+end
+
+// Creates an item that stores the last update time of this item
+rule "Records last weather update time"
+when
+  Item Weather_Temperature received update
+then
+  postUpdate(Weather_LastUpdate, new DateTimeType())
+end
+
+
+rule "Update max and min temperatures"
+when
+        Item Weather_Temperature changed or
+        Time cron "0 0 0 * * ?" or
+        System started
+then
+        postUpdate(Weather_Temp_Max, Weather_Temperature.maximumSince(now.toDateMidnight).state)
+        postUpdate(Weather_Temp_Min, Weather_Temperature.minimumSince(now.toDateMidnight).state)
+end
+

@@ -1,0 +1,120 @@
+WebGUI -> http://192.168.1.XX:8888/openhab.app?sitemap=glimperop
+REST API -> http://192.168.1.XX:8888/rest/items/  
+REST API (json) http://192.168.1.XX:8888/rest/items?type=json 
+
+=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=
+
+Install raspbian
+sudo apt-get update
+sudo apt-get upgrade
+
+sudo apt-get purge scratch
+sudo apt-get purge wolfram-engine
+sudo apt-get autoremove
+
+sudo apt-get remove --purge libreoffice*
+sudo apt-get clean
+sudo apt-get autoremove
+
+
+sudo raspi-config (enable ssh, pi password -> vims3n, timezone -> Europe/Athens, UPDATE!)
+sudo apt-get install xrdp
+
+#Install additional software
+sudo apt-get install -y xrdp openjdk-7-jdk wget build-essential apt-utils git python expect zip ftp
+ python-pycurl python-netifaces wiringPi openvpn
+# wiringPi is needed for rcswitch (see below)
+
+#Install mqtt paho client (you need it for running python + mqtt) - (I do not remember if you need to install dependencies in advance)
+git clone https://github.com/eclipse/paho.mqtt.python.git
+cd paho.mqtt.python
+sudo python setup.py install
+
+
+#### MySQL installation & Configuration ### and phpmyadmin ####
+sudo apt-get install mysql-server mysql-client phpmyadmin 
+#Configure mysql (openhab db, user = openhab) as shown in link below:
+#http://www.element14.com/community/community/design-challenges/forget-me-not/blog/2014/08/18/forgetmenot--week-3-data-persistence-with-openhab
+>> mysql -u root -p  
+Enter password:  
+mysql>  
+mysql> create database openhab;  
+mysql> show databases;  
+mysql> CREATE USER 'openhab'@'localhost' IDENTIFIED BY 'openhab';  
+mysql> GRANT ALL PRIVILEGES ON openhab.* TO 'openhab'@'localhost';  
+#mysql> use mysql;  
+#mysql> select * from db \G;  
+mysql> quit
+
+
+##### Install rcswitch @433 MHz #####
+-> copy rcswitch folder -> /home/pi/rcswitch-pi
+cd /home/pi/rcswitch-pi
+sudo chmod +x send
+
+### OPENVPN Configuration ######
+# changes are needed in files .... (see hednoVGW)
+
+
+### OPENHAB Installation + Configuration ######
+sudo mkdir /opt/openhab
+cd /opt/openhab
+sudo cp -r -f /home/pi/opt_openhab/* .
+sudo chmod +x start*
+# --- u have to change the last lines in openhab.cfg file
+# --- u have to delete lines not needed from glimperop.items & glimperop.sitemap
+
+#### Copy all python + ssh scripts to /home/pi and cron/ folders ###
+sudo cp *.py /home/pi/
+sudo cp cron/*.py /home/pi/cron/
+sudo cp *.sh /home/pi/
+##
+sudo chmod +x *.sh (/home/pi/ /opt/openhab, cron/)
+sudo chmod +x *.py (/home/pi/ /opt/openhab, cron/)
+sudo chown pi:pi *
+### u have to check upload.py and backup.py
+
+#### install razberry ######
+wget -q -O - http://razberry.z-wave.me/install | sudo bash 
+sudo reboot
+#(upon restart, the z-way-server starts automatically)
+ps –aux | grep z-way-server, (note the processID …), sudo kill -9 processID
+or ….. sudo service z-way-server stop
+(disable the z-way server at boot) -> sudo update-rc.d z-way-server disable
+#### connect to 192.168.xx.xx:8083 and upgrade to the latest sw relaease (settings -> Firmware Upgrade)
+
+copy the following to sudo crontab -e (example)
+#### Crontab ####
+#@reboot sudo /home/pi/startSakis3g.sh 
+
+@reboot sudo /home/pi/startVPN.sh 
+
+@reboot sudo sh /home/pi/startOpenhab.sh 
+
+@reboot python /home/pi/howOften.py >> /dev/null 2>&1 &
+
+@reboot python /home/pi/cron/forecast-io.py >> /dev/null 2>&1 &
+
+@reboot sudo sh /home/pi/sendVPNip.sh
+
+*/1 * * * * sudo python /home/pi/cron/VGW_info_now.py >> /dev/null 2>&1 
+
+
+1 
+9,19,29,39,49,59 * * * * sudo /home/pi/ping_google_com.sh >> /home/pi/reboot.log
+
+6,16,26,36,46,56 * * * * sudo python /home/pi/re_send_mail_IPchange.py >> /home/pi/reboot.log
+
+2 5 * * * sudo sh /home/pi/backup.sh
+
+
+
+sudo pico /etc/network/interfaces
+auto eth0 
+iface eth0 inet static
+address 192.168.1.80
+netmask 255.255.255.0
+gateway 192.168.1.1
+
+
+(RE)BOOT the VGW.
